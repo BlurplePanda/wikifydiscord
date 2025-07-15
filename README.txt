@@ -13,7 +13,7 @@ How to install/use:
 1. On the main code page of this repo, click the green "<> Code" dropdown
 2. Click "Download ZIP"
 3. Unzip the Zip
-4. Run main.py
+4. Run main.py (you do need Python 3 on your machine)
 5. Simply paste your Discord post in and press "Wikify!"
 
 Notes:
