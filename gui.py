@@ -43,6 +43,7 @@ if __name__ == '__main__':
     print(emoji_map)
     gui = tk.Tk()
     gui.title("Discord \"Wikifier\" - made by BlurplePanda/Panda185")
+    gui.iconphoto(True, tk.PhotoImage(file="icon.png"))
     gui.configure(bg="MediumPurple2")
 
     input_frame = tk.Frame(gui, bg="#d7b3ed", padx=10, pady=10)
