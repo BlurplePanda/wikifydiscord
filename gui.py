@@ -4,6 +4,8 @@ import tkinter.messagebox as mb
 from wikify_module import *
 
 load_emoji_map()
+load_user_map()
+load_channel_map()
 
 
 def submit():
