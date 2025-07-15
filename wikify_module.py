@@ -1,11 +1,8 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import re
 import sys
 import json
 from datetime import datetime, timezone
+import os
 
 emoji_map = {}
 unknown_emojis = []
@@ -133,6 +130,18 @@ def load_emoji_map(path="emoji_map.json"):
     with open(path, "r") as f:
         emoji_map = json.load(f)
 
+def load_user_map(path="user_map.json"):
+    global user_map
+    with open(path, "r") as f:
+        user_map = json.load(f)
+
+
+def load_channel_map(path="channel_map.json"):
+    global channel_map
+    with open(path, "r") as f:
+        channel_map = json.load(f)
+
+
 
 def convert_emojis(line):
     def emoji_replacer(match):
@@ -147,13 +156,16 @@ def convert_emojis(line):
 
 
 def convert_times(text):
+    def windows_fmt(fmt):
+        return fmt.replace("%-", "%#") if os.name == "nt" else fmt
+
     def time_replacer(match):
         timestamp = int(match.group(1))
         fmt_code = match.group(2) or 'f'  # default to f if no format specified
         utc_timestamp = datetime.fromtimestamp(timestamp, timezone.utc)
         format_map = {
             'F': "%A, %B %-d, %Y at %-I:%M %p",
-            'f': "%B %d, %Y at %I:%M %p",
+            'f': "%B %-d, %Y at %-I:%M %p",
             'D': "%B %-d, %Y",
             'd': "%m/%d/%y",
             'T': "%-I:%M:%S %p",
@@ -162,13 +174,12 @@ def convert_times(text):
         }
 
         fmt = format_map.get(fmt_code, "%B %-d, %Y at %-I:%M %p")  # default to f
-        return f"<kbd>{utc_timestamp.strftime(fmt)} [UTC](https://dateful.com/convert/utc)</kbd>"
+        return f"<kbd>{utc_timestamp.strftime(windows_fmt(fmt))} [UTC](https://dateful.com/convert/utc)</kbd>"
 
     text = re.sub(r"<t:(\d+):([a-zA-Z])?>", time_replacer, text)
     return text
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     load_emoji_map()
 
@@ -185,5 +196,3 @@ if __name__ == '__main__':
         print(unknown_emojis)
         for emoji in unknown_emojis:
             print(emoji)
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
