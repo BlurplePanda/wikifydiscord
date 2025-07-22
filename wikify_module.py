@@ -176,7 +176,7 @@ def convert_times(text):
         fmt = format_map.get(fmt_code, "%B %-d, %Y at %-I:%M %p")  # default to f
         return f"<kbd>{utc_timestamp.strftime(windows_fmt(fmt))} [UTC](https://dateful.com/convert/utc)</kbd>"
 
-    text = re.sub(r"<t:(\d+):([a-zA-Z])?>", time_replacer, text)
+    text = re.sub(r"<t:(\d+)(?::([a-zA-Z]))?>", time_replacer, text)
     return text
 
 
