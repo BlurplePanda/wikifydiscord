@@ -37,8 +37,19 @@ def convert_underlines(text):
 
 
 def convert_bold_italic(text):
-    return re.sub(r"(\*{1,3})\s*(.*?)\s*\1", r"\1\2\1", text, flags=re.DOTALL)
+    # fix spacing near *
+    text = re.sub(r"(\*{1,3})\s*(.*?)\s*\1", r"\1\2\1", text, flags=re.DOTALL)
 
+    # fix ! near * (by swapping tags but only there so editor looks nicer)
+    def excl_tag_replacer(match):
+        to_html = {
+            "*": ("<i>", "</i>"),
+            "**": ("<b>", "</b>"),
+            "***": ("<b><i>", "</i></b>")
+        }
+        return f"{to_html.get(match.group(1))[0]}{match.group(2)}{to_html.get(match.group(1))[1]}"
+
+    return re.sub(r"(\*{1,3})([^\*]+?!)\1", excl_tag_replacer, text, flags=re.DOTALL)
 
 def escape_brackets(text):
     # find valid markdown links (don't wanna escape those brackets!)
