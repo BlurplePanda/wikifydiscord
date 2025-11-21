@@ -23,7 +23,7 @@ def wikify(post):
     post = '\n'.join(processed_lines)
     post = """<h3 style="visibility: hidden;">pagename [mo-da-ye]</h3>
 
-> ![](/userchangelog.png =40x) <font size="+4">title</font>
+> ![](/userchangelog.png =40x){.pfp} <font size="+4">title</font>
 > <kbd>:spiral_calendar:Month 0 2025</kbd> | Posted by `ign`
 > 
 > ---
