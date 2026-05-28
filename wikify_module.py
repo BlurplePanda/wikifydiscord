@@ -24,7 +24,7 @@ def wikify(post):
     post = """<h3 style="visibility: hidden;">pagename [mo-da-ye]</h3>
 
 > ![](/discord/pfp/user.png =40x){.pfp} <font size="+4">title</font>
-> <kbd>:spiral_calendar:Month 0 2025</kbd> | Posted by `ign`
+> <kbd>:spiral_calendar:Month 0 2026</kbd> | Posted by `ign`
 > 
 > ---
 > 
