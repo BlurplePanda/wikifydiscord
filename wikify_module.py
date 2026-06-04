@@ -97,12 +97,13 @@ def convert_tags(text):
     text = re.sub(r"<@([&!]?\d+)>", tag_replacer, text)
 
     # remove events/changelog pings that aren't part of eg "get the `ping events` role in #welcome"
-    text = re.sub(r"`@ping (?:changelog|events)`(?![ ]*(?:role|in))", "", text)
+    text = re.sub(r"`@ping (?:changelog|events|socials)`(?![ ]*(?:role|in))", "", text)
 
     return text
 
 
 def convert_channels(text):
+    # TODO swap full https channel links as well as discord channel embeds
     def channel_replacer(match):
         channel = match.group(1)
         if channel in channel_map:
