@@ -3,6 +3,7 @@ import sys
 import json
 from datetime import datetime, timezone
 import os
+from pathlib import Path
 
 emoji_map = {}
 unknown_emojis = []
@@ -137,18 +138,18 @@ def convert_headings(line):
     return line
 
 
-def load_emoji_map(path="emoji_map.json"):
+def load_emoji_map(path=f"{Path(__file__).parent}/emoji_map.json"):
     global emoji_map
     with open(path, "r") as f:
         emoji_map = json.load(f)
 
-def load_user_map(path="user_map.json"):
+def load_user_map(path=f"{Path(__file__).parent}/user_map.json"):
     global user_map
     with open(path, "r") as f:
         user_map = json.load(f)
 
 
-def load_channel_map(path="channel_map.json"):
+def load_channel_map(path=f"{Path(__file__).parent}/channel_map.json"):
     global channel_map
     with open(path, "r") as f:
         channel_map = json.load(f)
